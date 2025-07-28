@@ -1,3 +1,5 @@
+# Copyright (C) Attila Szabó, Apache license
+
 from sys import stderr
 from datetime import datetime
 
