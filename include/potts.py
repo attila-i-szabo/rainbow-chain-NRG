@@ -1,3 +1,7 @@
+"""Functions to build MPO tensors for NRG of the three-state Potts model."""
+
+# Copyright (C) Attila Szabó, Apache license
+
 import numpy as np
 
 from tenpy.networks.site import ClockSite

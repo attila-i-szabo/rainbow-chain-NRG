@@ -1,3 +1,7 @@
+"""Functions to build MPO tensors for NRG of the transverse-field Ising model."""
+
+# Copyright (C) Attila Szabó, Apache license
+
 import numpy as np
 
 from tenpy.networks.site import SpinHalfSite
