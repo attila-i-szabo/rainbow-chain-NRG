@@ -1,0 +1,19 @@
+{
+    "model": "Potts3",
+    "L": 1024,
+    "Delta": 0.25,
+    "trunc_par": {"chi_max": 400, "degeneracy_tol": 1e-10},
+    "save_mps": true,
+    "save_env": 16,
+    "finetune": {
+        "burn_in": 50,
+        "max": -5.0236,
+        "min": -5.0237,
+        "guess": [
+            1.0,
+            0.99999
+        ],
+        "max_step": 768,
+        "tolerance": 1e-14
+    }
+}

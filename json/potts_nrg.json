@@ -1,0 +1,17 @@
+{
+    "model": "Potts3",
+    "coupling": "FM",
+    "Delta": 0.25,
+    "symmetry": "Z3",
+    "trunc_par": {
+        "chi_max": 400,
+        "degeneracy_tol": 1e-10,
+        "chi_min": null,
+        "e_max": null
+    },
+    "L": 1024,
+    "save_mps": true,
+    "save_env": 16,
+    "g": 0.9999964569094704,
+    "g_name": "finetune"
+}
