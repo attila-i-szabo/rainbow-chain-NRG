@@ -2,7 +2,7 @@
 
 Usage: nrg.py [parameter JSON file]
 
-Output is written into an .h5 (results) and a .json (parameters) file."""
+Output is written into an HDF5 (results) and a JSON (parameters) file."""
 
 # Copyright (C) Attila Szabó, Apache license
 
@@ -124,5 +124,5 @@ with h5py.File(f"{fname}_zipped.h5", "w") as f:
         f.get("/env/keys").attrs.modify("len", n_env)
         f.get("/env/values").attrs.modify("len", n_env)
 
-print('Parameters saved to', f"{fname}.json", file=stderr)
-print('Data output saved to', f"{fname}_zipped.h5", file=stderr)
+print("Parameters saved to", f"{fname}.json", file=stderr)
+print("Data output saved to", f"{fname}_zipped.h5", file=stderr)
