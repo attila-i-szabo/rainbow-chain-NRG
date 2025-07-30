@@ -179,7 +179,7 @@ def unzip(
 
     Returns
     -------
-    (S, leg), [(As, Bs)], [cumulative]
+    (S, leg, [As, Bs]), [cumulative]
 
     S: Schmidt values in the middle
 
@@ -233,10 +233,10 @@ def unzip(
         callback_args = callback(A, B, callback_args)
 
     # Output
-    retval = ((S, B.get_leg("vL")),)
+    retval = S, B.get_leg("vL")
     if return_mps:
-        retval = retval + ((As, Bs),)
+        retval = retval + (As, Bs)
     if callback is not None:
-        retval = retval + callback_args
+        retval = retval, callback_args
 
     return retval

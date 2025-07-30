@@ -1,0 +1,11 @@
+{
+    "L": 256,
+    "charge": 0,
+    "trunc_par": {
+        "chi_max": 400,
+        "svd_min": 1e-08,
+        "degeneracy_tol": 1e-10
+    },
+    "algorithm": "SVD",
+    "save_mps": false
+}
