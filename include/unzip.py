@@ -2,6 +2,7 @@
 
 from sys import stderr
 from datetime import datetime
+from typing import Callable, Any
 
 import tenpy.linalg.np_conserved as npc
 from tenpy.linalg.truncation import svd_theta
@@ -149,6 +150,8 @@ def unzip(
     algorithm="SVD",
     return_mps=True,
     verbose=True,
+    callback: Callable | None = None,
+    callback_args: Any = None,
 ):
     """Takes a zipped mps (given as a list of Arrays) and unzips it into
     tensors of a standard MPS.
@@ -169,18 +172,24 @@ def unzip(
 
     verbose: whether to print runtime information to stderr
 
+    callback: optional callback function with arguments `A`, `B`, `cumulative`
+        `cumulative` for each step is the output at the previous one.
+
+    callback_args: Initial value of `cumulative`
+
     Returns
     -------
-    if `return_mps`: A, B, (S, leg)
-    else: S, leg
-
-    A: list of left-canonical MPS tensors from left to right
-
-    B: list of right-canonical MPS tensors from right top left
+    (S, leg), [(As, Bs)], [cumulative]
 
     S: Schmidt values in the middle
 
     leg: `LegCharge` corresponding to the array `S`
+
+    As: list of left-canonical MPS tensors from left to right if `return_mps is True`
+
+    Bs: list of right-canonical MPS tensors from right to left if `return_mps is True`
+
+    cumulative: final output of `callback` if `callback is not None`
     """
     if return_mps:
         As = []
@@ -206,6 +215,9 @@ def unzip(
             As.append(A)
             Bs.append(B)
 
+        if callback is not None:
+            callback_args = callback(A, B, callback_args)
+
     # i = 0
     if verbose:
         print("Rung 0", file=stderr)
@@ -217,8 +229,14 @@ def unzip(
         As.append(A)
         Bs.append(B)
 
+    if callback is not None:
+        callback_args = callback(A, B, callback_args)
+
     # Output
+    retval = ((S, B.get_leg("vL")),)
     if return_mps:
-        return As, Bs, (S, B.get_leg("vL"))
-    else:
-        return S, B.get_leg("vL")  # leg needed to assign S to charge sectors
+        retval = retval + ((As, Bs),)
+    if callback is not None:
+        retval = retval + callback_args
+
+    return retval
