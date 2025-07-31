@@ -86,6 +86,14 @@ The second argument is the maximum number of energies per charge sector (optiona
 
 ### Implementation notes
 
+The algorithms are implemented in the directory `include`:
+
+* `potts.py` and `TFI.py` implement the rainbow chain Hamiltonian for the three-state Potts and transverse-field Ising models in MPO form
+* `nrg.py` implements the NRG iteration step for a general MPO
+* `unzip.py` implements the unzipping algorithms (single step for QR and SVD, as well as the full iteration)
+* `linalg.py` is a modification of TeNPy's `eigh` to use an alternative diagonalisation routine
+* `truncate.py` is an adaptation of TeNPy's truncation routines for NRG energy spectra
+
 ### License
 
 The code is freely usable under the Apache License v2.0. If you use it in your own projects, please cite the paper [Rainbow chains and numerical renormalisation group for accurate chiral conformal spectra](https://arxiv.org/abs/2412.09685).
